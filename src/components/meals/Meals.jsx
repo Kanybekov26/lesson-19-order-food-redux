@@ -10,23 +10,22 @@ const DUMMY_MILS = [
   },
   {
     id: '2',
-
     title: "Schnitzel",
-    description: "American, raw, meaty",
+    description: "A german specialty!",
     price: 16.99,
   },
   {
     id: '3',
-    title: "Schnitzel",
+    title: "Barbecue Burger",
     description: "American, raw, meaty",
-    price: 16.99,
+    price: 12.99,
   },
 
   {
     id: '4',
-    title: "Schnitzel",
-    description: "American, raw, meaty",
-    price: 16.99,
+    title: "Green Bowl",
+    description: "Healthy...and green...",
+    price: 19.99,
   },
 ];
 
