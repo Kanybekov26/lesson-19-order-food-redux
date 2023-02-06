@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import styled from "styled-components";
 import MealItemForm from "./MealItemForm";
 const MealItem = ({ meal }) => {
@@ -14,7 +14,7 @@ const MealItem = ({ meal }) => {
   );
 };
 
-export default MealItem;
+export default memo(MealItem);
 
 const Container = styled.li`
   list-style: none;
