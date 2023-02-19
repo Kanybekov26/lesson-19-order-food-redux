@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import { fetchApi } from "../lib/FetchApi";
+import { getBasket } from "./basket/basketReducer";
 
 export const BasketContext = createContext({
   items: [],
@@ -33,36 +34,29 @@ export const BasketProvaider = ({ children }) => {
     }
   };
 
-  const getBasket = async () => {
-    try {
-      const { data } = await fetchApi("basket");
-      setaItems(data.items);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+ 
 
-  useEffect(() => {
-    getBasket();
-  }, []);
+  // useEffect(() => {
+  //   getBasket();
+  // }, []);
 
-  const addToBasket = async (newItem) => {
-    console.log(newItem.amount);
-    try {
-      const response = await fetchApi(`foods/${newItem.id}/addToBasket`, {
-        method: "POST",
-        body: { amount: newItem.amount },
-      });
+  // const addToBasket = async (newItem) => {
+  //   console.log(newItem.amount);
+  //   try {
+  //     const response = await fetchApi(`foods/${newItem.id}/addToBasket`, {
+  //       method: "POST",
+  //       body: { amount: newItem.amount },
+  //     });
 
-      setaItems(response.data.items);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  //     setaItems(response.data.items);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   const state = {
     items,
-    addToBasket,
+    // addToBasket,
     updateBasketItem,
   deleteBasketItem 
   };

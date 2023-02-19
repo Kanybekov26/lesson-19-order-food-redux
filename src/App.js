@@ -1,11 +1,12 @@
 import { useState } from 'react';
+import { Provider } from 'react-redux';
 import styled from 'styled-components';
 import './App.css';
 import Basket from './components/basket/Basket';
 import Header from './components/header/Header';
 import Meals from './components/meals/Meals';
 import Summary from './components/summary/Summary';
-import { BasketProvaider } from './store/BasketContext';
+import { store } from './store';
 
 function App() {
 
@@ -17,14 +18,14 @@ function App() {
 
   return (
     
-      <BasketProvaider>
+      <Provider store={store}>
      <Header onShowBasket={showBasketHandler}/>
      <Content>
      <Summary/>
      <Meals/>
     {isbasketVisible && <Basket onClose={showBasketHandler}/> } 
      </Content>
-     </BasketProvaider>
+     </Provider>
     
   );
 }

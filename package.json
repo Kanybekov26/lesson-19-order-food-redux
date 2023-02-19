@@ -1,5 +1,5 @@
 {
-  "homepage": "https://Kanybekov26.github.io/lesson-11-hw-order-food",
+  "homepage": "https://Kanybekov26.github.io/lesson-14-useMemo-memo-useCallback-",
   "name": "lesson-11-order-food",
   "version": "0.1.0",
   "private": true,
@@ -10,7 +10,10 @@
     "gh-pages": "^5.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-redux": "^8.0.5",
     "react-scripts": "5.0.1",
+    "redux": "^4.2.1",
+    "redux-thunk": "^2.4.2",
     "styled-components": "^5.3.6",
     "web-vitals": "^2.1.4"
   },

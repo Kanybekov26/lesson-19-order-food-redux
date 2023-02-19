@@ -2,11 +2,11 @@ import React, { useContext, useState } from "react";
 import Button from "../../Ui/Button";
 import { ReactComponent as PluseIcon } from "../../../assets/icons/plus-icon.svg.svg";
 import styled from "styled-components";
-import { BasketContext } from "../../../store/BasketContext";
+import { addToBasket } from "../../../store/basket/basketReducer";
+import { useDispatch } from "react-redux";
 
 const MealItemForm = ({ id, title, price }) => {
-  const { addToBasket } = useContext(BasketContext);
-
+ const dispatch = useDispatch()
   const [amount, setAmount] = useState(1);
 
   const amountChangeHandler = (event) => {
@@ -15,14 +15,13 @@ const MealItemForm = ({ id, title, price }) => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-
     const basketItem = {
       id,
       title,
       price,
       amount,
     };
-    addToBasket(basketItem);
+    dispatch(addToBasket(basketItem));
   };
   return (
     <StyledForm onSubmit={submitHandler}>

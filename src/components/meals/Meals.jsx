@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { fetchApi } from "../../lib/FetchApi";
+import { getMeals, mealsActionTypes } from "../../store/meals/mealsReducer";
 import MealItem from "./meal-item/MealItem";
 const DUMMY_MILS = [
   {
@@ -31,26 +33,22 @@ const DUMMY_MILS = [
 ];
 
 const Meals = () => {
-  const [meals,setmeals] = useState([])
-  const [error,setError] = useState('')
+  const dispatch = useDispatch()
+ const {meals,isLoading,error} = useSelector((state) => state.meals)
+ console.log(error);
+  // const getMeals = async() => {
+   
 
-  const getMeals = async() => {
-    try{
- const respons = await fetchApi('foods');
- console.log(respons);
- setmeals(respons.data)
- }catch(error) {
-  console.log(error);
-  setError("failed to load meals")
- }
-
-  }
+  // }
 
   useEffect(() => {
-    getMeals();
-  },[])
+    dispatch(getMeals())
+
+  },[dispatch])
   return <>
     <Card>
+      {isLoading && <p>loading......</p>}
+      {error && <p style={{color: "red"}}>{error}</p>}
     {meals.map((meal) => {
       return <MealItem meal={meal} key={meal.id}/>
     })}

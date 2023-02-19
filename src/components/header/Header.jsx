@@ -1,11 +1,17 @@
 import styled from "styled-components";
 import React, { useContext, useEffect, useState } from "react";
 import BasketButton from "../header/BasketButton";
-import { BasketContext } from "../../store/BasketContext";
+import { useDispatch, useSelector } from "react-redux";
+import { getBasket } from "../../store/basket/basketReducer";
 
 const Header = ({ onShowBasket }) => {
-  const { items } = useContext(BasketContext);
+  const dispatch = useDispatch()
+  const  items = useSelector((state) => state.basket.items)
   const [animationClass, setAnimatioClass] = useState("");
+
+useEffect(() => {
+dispatch(getBasket());
+},[dispatch])
 
   const calculateTotalAmount = () => {
     console.log(items)
