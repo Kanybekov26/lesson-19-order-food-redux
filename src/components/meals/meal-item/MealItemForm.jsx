@@ -1,8 +1,8 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import Button from "../../Ui/Button";
 import { ReactComponent as PluseIcon } from "../../../assets/icons/plus-icon.svg.svg";
 import styled from "styled-components";
-import { addToBasket } from "../../../store/basket/basketReducer";
+import { addToBasket } from "../../../store/basket/basketSlice";
 import { useDispatch } from "react-redux";
 
 const MealItemForm = ({ id, title, price }) => {

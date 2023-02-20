@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import BasketButton from "../header/BasketButton";
 import { useDispatch, useSelector } from "react-redux";
-import { getBasket } from "../../store/basket/basketReducer";
+import { getBasket } from "../../store/basket/basketSlice";
 
 const Header = ({ onShowBasket }) => {
   const dispatch = useDispatch()

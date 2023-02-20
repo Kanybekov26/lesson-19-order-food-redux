@@ -1,6 +1,5 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 import { fetchApi } from "../lib/FetchApi";
-import { getBasket } from "./basket/basketReducer";
 
 export const BasketContext = createContext({
   items: [],

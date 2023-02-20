@@ -1,8 +1,7 @@
-import React, { useCallback, useContext } from "react";
+import React, { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { deleteBasketItem, updateBasketItem } from "../../store/basket/basketReducer";
-import { BasketContext } from "../../store/BasketContext";
+import { deleteBasketItem, updateBasketItem } from "../../store/basket/basketSlice";
 import Modal from "../Ui/Modal";
 import Basketitem from "./Basketitem";
 import TotalAmount from "./TotalAmount";
@@ -33,6 +32,7 @@ const Basket = ({ onClose }) => {
   );
   return (
     <Modal onClose={onClose}>
+
       <Content>
         {items.length ? (
           <FixedHeightContainer>
