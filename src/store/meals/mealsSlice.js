@@ -31,7 +31,7 @@ export const mealsSlice = createSlice({
       state.isLoading = true;
     });
 
-    builder.addCase(getMeals.pending,(state,action) => {
+    builder.addCase(getMeals.rejected,(state,action) => {
       state.isLoading = false;
       state.error = action.payload
     });
@@ -45,7 +45,7 @@ export const getMeals = createAsyncThunk(
   async (payload, { dispatch ,rejectWithValue}) => {
     try {
 
-      const { data } = await fetchApi("foods");
+      const { data } = await fetchApi("foodsss");
       return data
     } catch (error) {
      return rejectWithValue("Some thing went wrong ")

@@ -8,7 +8,7 @@ export const basketActionTypes = {
 
 const initialState = {
   items: [],
-  error:''
+  error: "",
 };
 
 export const basketSlice = createSlice({
@@ -19,11 +19,11 @@ export const basketSlice = createSlice({
       state.items = action.payload;
     },
   },
-  extraReducers:(builder) => {
-    builder.addCase(addToBasket.rejected, (state,action) => {
-    state.error = action.payload
-    })
-  }
+  extraReducers: (builder) => {
+    builder.addCase(addToBasket.rejected, (state, action) => {
+      state.error = action.payload;
+    });
+  },
 });
 
 export const basketActions = basketSlice.actions;
@@ -37,17 +37,20 @@ export const getBasket = () => async (dispatch) => {
   }
 };
 
-export const addToBasket =createAsyncThunk ("basket/addToBasket", async (newItem,{dispatch,rejectWithValue}) => {
-  try {
-    await fetchApi(`foods/${newItem.id}/addToBasket`, {
-      method: "POST",
-      body: { amount: newItem.amount },
-    });
-    dispatch(getBasket());
-  } catch (error) {
-    return rejectWithValue("Some thing wen wrong")
+export const addToBasket = createAsyncThunk(
+  "basket/addToBasket",
+  async (newItem, { dispatch, rejectWithValue }) => {
+    try {
+      await fetchApi(`foods/${newItem.id}/addToBasket`, {
+        method: "POST",
+        body: { amount: newItem.amount },
+      });
+      dispatch(getBasket());
+    } catch (error) {
+      return rejectWithValue("Some thing wen wrong");
+    }
   }
-}) 
+);
 
 export const updateBasketItem =
   ({ id, amount }) =>
@@ -73,3 +76,18 @@ export const deleteBasketItem = (id) => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const submitOrder = createAsyncThunk(
+  "basket/submitOrder",
+  async ({orderData}, { dispatch, rejectWithValue }) => {
+    try {
+      await fetch(`https://jsonplaceholder.typicode.com/posts`, {
+        method: "POST",
+        body: orderData,
+      });
+      dispatch(getBasket());
+    } catch (error) {
+      return rejectWithValue("Some thing wen wrong");
+    }
+  }
+);

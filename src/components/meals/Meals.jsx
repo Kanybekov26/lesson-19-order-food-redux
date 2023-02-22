@@ -33,7 +33,7 @@ import MealItem from "./meal-item/MealItem";
 
 const Meals = () => {
   const dispatch = useDispatch()
- const {meals,isLoading,error} = useSelector((state) => state.meals)
+ const {meals = [],isLoading,error} = useSelector((state) => state.meals)
  console.log(error);
  
 
@@ -45,7 +45,7 @@ const Meals = () => {
     <Card>
       {isLoading && <p>loading......</p>}
       {error && <p style={{color: "red"}}>{error}</p>}
-    {meals || [].map((meal) => {
+    {meals.map((meal) => {
       return <MealItem meal={meal} key={meal.id}/>
     })}
     </Card>

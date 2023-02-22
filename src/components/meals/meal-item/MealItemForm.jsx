@@ -4,6 +4,7 @@ import { ReactComponent as PluseIcon } from "../../../assets/icons/plus-icon.svg
 import styled from "styled-components";
 import { addToBasket } from "../../../store/basket/basketSlice";
 import { useDispatch } from "react-redux";
+import {TextField} from "@mui/material"
 
 const MealItemForm = ({ id, title, price }) => {
  const dispatch = useDispatch()
@@ -37,6 +38,19 @@ const MealItemForm = ({ id, title, price }) => {
           onChange={amountChangeHandler}
         />
       </Container>
+     <Container>
+
+     <TextField
+          id="filled-number"
+          label="Number"
+          type="number"
+          InputLabelProps={{
+            shrink: true,
+          }}
+          variant="filled"
+        />
+     </Container>
+
       <Button>
         <StyledIcon />
         add
