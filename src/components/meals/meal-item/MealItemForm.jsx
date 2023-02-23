@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import Button from "../../Ui/Button";
 import { ReactComponent as PluseIcon } from "../../../assets/icons/plus-icon.svg.svg";
-import styled from "styled-components";
+import styledComponents from "styled-components";
+import {styled} from "@mui/system";
 import { addToBasket } from "../../../store/basket/basketSlice";
 import { useDispatch } from "react-redux";
 import {TextField} from "@mui/material"
@@ -40,15 +41,15 @@ const MealItemForm = ({ id, title, price }) => {
       </Container>
      <Container>
 
-     <TextField
-          id="filled-number"
-          label="Number"
-          type="number"
+     {/* <TextField
+          id="outlined-number"
+          type="text"
           InputLabelProps={{
             shrink: true,
           }}
-          variant="filled"
-        />
+          size="small"
+          error
+        /> */}
      </Container>
 
       <Button>
@@ -61,17 +62,24 @@ const MealItemForm = ({ id, title, price }) => {
 
 export default MealItemForm;
 
-const StyledIcon = styled(PluseIcon)`
+// const StyledTextField = styled(TextField)(() => {
+//   '.MuiTextField-root': {
+//     width: "70px",
+
+//   }
+// })
+
+const StyledIcon = styledComponents(PluseIcon)`
   margin-right: 10px;
 `;
 
-const StyledForm = styled.form`
+const StyledForm = styledComponents.form`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
 `;
 
-const Container = styled.div`
+const Container = styledComponents.div`
   margin-bottom: 12px;
   label {
     font-weight: 600;

@@ -45,7 +45,7 @@ export const getMeals = createAsyncThunk(
   async (payload, { dispatch ,rejectWithValue}) => {
     try {
 
-      const { data } = await fetchApi("foodsss");
+      const { data } = await fetchApi("foods");
       return data
     } catch (error) {
      return rejectWithValue("Some thing went wrong ")
