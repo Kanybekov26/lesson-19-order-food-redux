@@ -7,7 +7,6 @@ import {
   submitOrder,
   updateBasketItem,
 } from "../../store/basket/basketSlice";
-import Modal from "../Ui/Modal";
 import Basketitem from "./Basketitem";
 import TotalAmount from "./TotalAmount";
 import { uiActions } from "../../store/ui/uiSlice";

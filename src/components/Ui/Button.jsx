@@ -1,46 +1,58 @@
 import React from "react";
-import styled from "styled-components";
+import {styled} from "@mui/system";
+import {Button as MuiButton }  from "@mui/material";
 const Button = ({ children,variant = "coatained",borderStyle = "rounded",...restProps }) => {
-  return <StyledButton variant={variant} borderStyle={borderStyle} {...restProps}>{children}</StyledButton>;
+  return(
+  <>
+   <StyledButton variant={variant} borderStyle={borderStyle} {...restProps}>{children}</StyledButton> 
+   {/* <StyledButton variant={variant} borderStyle={borderStyle} {...restProps}>{children}</StyledButton>; */}
+  </>
+  )
 };
 export default Button;
 
-const getBackgroundColor = (props) => {
-  return props.variant === "coatained" ?" #8a2b06" : "#fff"
+const getBackgroundColor = (variant) => {
+  return variant === "coatained" ? " #8a2b06" : "#fff"
 }
 
-const getBorder = (props) => {
-  return props.variant === "coatained" ?"none" : " 1px solid #8a2b06"
+const getBorder = (variant) => {
+  return variant === "coatained" ? "none" : " 1px solid #8a2b06"
 }
 
-const getColor = (props) => {
-  return props.variant === "coatained" ?"#fff" : "#8a2b06"
+const getColor = (variant) => {
+  return variant === "coatained" ? "#fff" : "#8a2b06"
 }
 
-const getRadius = (props) => {
-  return props.borderStyle === "rounded" ?"20px" : "6px"
+const getRadius = (borderStyle) => {
+  return borderStyle === "rounded" ?"20px" : "6px"
 }
 
 
-const StyledButton = styled.button`
-  background:${getBackgroundColor};
-  color:${getColor};
-  border-radius:${getRadius} ;
-  padding: 10px 32px;
-  font-weight: 600;
-  line-height: 24px;
-  border:${getBorder};
-  display:flex;
-  align-items:center;
-cursor: pointer;
-:hover {
-    background: #7E2A0A;
-    color:#fff;
-}
-:active {
-    background: #993108;
-}
-`
+const StyledButton = styled(MuiButton)((variant,borderStyle) => ({
+  "&":{
+    background:getBackgroundColor(variant),
+    color:getColor(variant),
+    borderRadius:getRadius(borderStyle),
+    padding: "10px 32px",
+    fontWeight: "600",
+    lineHeight: "24px",
+    border:getBorder(variant),
+    display:"flex",
+    alignItems:"center",
+  cursor: "pointer",
+  
+  '&:hover': {
+    background: "#7E2A0A",
+    color:"#fff",
+},
+'&:active':  {
+    background: "#993108",
+},
+  }
+  
+}))
+ 
+
 
 
 

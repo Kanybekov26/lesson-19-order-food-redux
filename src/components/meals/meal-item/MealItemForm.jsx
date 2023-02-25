@@ -6,6 +6,7 @@ import {styled} from "@mui/system";
 import { addToBasket } from "../../../store/basket/basketSlice";
 import { useDispatch } from "react-redux";
 import {TextField} from "@mui/material"
+import AddIcon from '@mui/icons-material/Add'
 
 const MealItemForm = ({ id, title, price }) => {
  const dispatch = useDispatch()
@@ -26,34 +27,27 @@ const MealItemForm = ({ id, title, price }) => {
     dispatch(addToBasket(basketItem));
   };
   return (
-    <StyledForm onSubmit={submitHandler}>
+    <StyledForm onClick={submitHandler}>
       <Container>
         <label htmlFor={id}>Amount</label>
-        <input
-          type="number"
-          id={id}
-          min={1}
-          max={5}
-          defaultChecked={1}
-          value={amount}
-          onChange={amountChangeHandler}
-        />
-      </Container>
-     <Container>
 
-     {/* <TextField
-          id="outlined-number"
-          type="text"
+
+     <StyledTextField
+          id={id}
+          type="number"
           InputLabelProps={{
             shrink: true,
           }}
           size="small"
           error
-        /> */}
+          value={amount}
+          onChange={amountChangeHandler}
+         
+        />
      </Container>
 
       <Button>
-        <StyledIcon />
+        <StyledIcon/>
         add
       </Button>
     </StyledForm>
@@ -62,16 +56,23 @@ const MealItemForm = ({ id, title, price }) => {
 
 export default MealItemForm;
 
-// const StyledTextField = styled(TextField)(() => {
-//   '.MuiTextField-root': {
-//     width: "70px",
+const StyledTextField = styled(TextField)(() => ({
+  "&":{
+    width:'70px'
+  },
+  '.MuiOutlinedInput-input':{
+  padding: ' 3px 10px',
+  // fontSize: "200px"
+  }
+}))
 
-//   }
-// })
+const StyledIcon = styled(AddIcon)(() => ({
+'&':{
+  marginRight: "10px",
 
-const StyledIcon = styledComponents(PluseIcon)`
-  margin-right: 10px;
-`;
+}
+}))
+
 
 const StyledForm = styledComponents.form`
   display: flex;
