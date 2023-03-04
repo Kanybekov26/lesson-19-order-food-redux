@@ -1,27 +1,25 @@
 const BASE_URL =
-  "http://ec2-3-122-253-30.eu-central-1.compute.amazonaws.com:5500/api/v1";
+    'http://ec2-3-122-253-30.eu-central-1.compute.amazonaws.com:5500/api/v1'
 
-  export const fetchApi = async (path, options = {}) => {
-  try {
+export const fetchApi = async (path, options = {}) => {
+    try {
+        const requestOptions = {
+            method: options.method || 'GET',
+            headers: { UserId: 'bekbol', 'Content-Type': 'application/json' },
+        }
+        if (requestOptions.method !== 'GET') {
+            requestOptions.body = JSON.stringify(options.body)
+        }
 
-const requestOptions = {
-    method: options.method || "GET",
-    headers: {UserId: "bekbol", "Content-Type": "application/json" },
-}
-if(requestOptions.method !== "GET"){
+        const response = await fetch(`${BASE_URL}/${path}`, requestOptions)
 
-    requestOptions.body = JSON.stringify(options.body);
-}
+        if (!response.ok) {
+            throw new Error('Something went wrong')
+        }
 
-    const response = await fetch(`${BASE_URL}/${path}`,  requestOptions);
-
-    if (!response.ok) {
-      throw new Error("Something went wrong");
+        const result = await response.json()
+        return result
+    } catch (error) {
+        return error
     }
-
-    const result = await response.json();
-    return result;
-  } catch (error) {
-    throw(error)
-  }
-};
+}

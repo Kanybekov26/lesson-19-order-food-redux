@@ -1,71 +1,80 @@
-import styled from "styled-components";
-import React, { useEffect, useState } from "react";
-import BasketButton from "../header/BasketButton";
-import { useDispatch, useSelector } from "react-redux";
-import { getBasket } from "../../store/basket/basketSlice";
+import styledComponents from 'styled-components'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Button } from '@mui/material'
+import { styled } from '@mui/material/styles'
 
-const Header = ({ onShowBasket }) => {
-  const dispatch = useDispatch()
-  const  items = useSelector((state) => state.basket.items)
-  const [animationClass, setAnimatioClass] = useState("");
+import BasketButton from './BasketButton'
+import { getBasket } from '../../store/basket/basket.slice'
+import { uiActions } from '../../store/ui/ui.slice'
 
-useEffect(() => {
-dispatch(getBasket());
-},[dispatch])
+function Header({ onShowBasket }) {
+    const dispatch = useDispatch()
+    const items = useSelector((state) => state.basket.items)
+    const themeMode = useSelector((state) => state.ui.themeMode)
+    const [animationClass, setAnimatioClass] = useState('')
 
-  const calculateTotalAmount = () => {
-    console.log(items)
-    const sum = items.reduce((s, item) => {
-    
-      return s + item.amount;
-    }, 0);
-    return sum;
-  };
+    useEffect(() => {
+        dispatch(getBasket())
+    }, [dispatch])
 
-  useEffect(() => {
-    setAnimatioClass("bump");
+    const calculateTotalAmount = () => {
+        const sum = items.reduce((s, item) => s + item.amount, 0)
+        return sum
+    }
 
-    const id = setTimeout(() => {
-      setAnimatioClass("");
-    }, 300);
+    useEffect(() => {
+        setAnimatioClass('bump')
 
-    return () => {
-      clearTimeout(id);
-    };
-  }, [items]);
-  return (
-    <Container>
-      <Logo>ReactMeals</Logo>
-      <BasketButton
-        className={animationClass}
-        onClick={onShowBasket}
-        count={calculateTotalAmount()}
-      ></BasketButton>
-    </Container>
-  );
-};
+        const id = setTimeout(() => {
+            setAnimatioClass('')
+        }, 300)
 
-export default Header;
+        return () => {
+            clearTimeout(id)
+        }
+    }, [items])
 
-const Container = styled.header`
-  width: 100%;
-  height: 101px;
-  background-color: #8a2b06;
-  display: flex;
-  justify-content: space-between;
-  padding-left: 120px;
-  padding-right: 120px;
-  align-items: center;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-`;
+    const themChangeHandler = () => {
+        const them = themeMode === 'light' ? 'dark' : 'light'
+        dispatch(uiActions.changeTheme(them))
+    }
+    return (
+        <Container>
+            <Logo>ReactMeals</Logo>
+            <BasketButton
+                className={animationClass}
+                onClick={onShowBasket}
+                count={calculateTotalAmount()}
+            />
+            <Button onClick={themChangeHandler} sx={{ color: 'white' }}>
+                {themeMode === 'light' ? 'Turn dark mode' : 'Turn light mode'}
+            </Button>
+        </Container>
+    )
+}
 
-const Logo = styled.p`
-  font-weight: 600;
-  font-size: 38px;
-  line-height: 57px;
+export default Header
 
-  margin: 0;
-  color: #ffffff;
-`;
+const Container = styled('header')(({ theme }) => ({
+    width: '100%',
+    height: '101px',
+    backgroundColor: theme.palette.primary.dark,
+    display: 'flex',
+    justifyContent: 'space-between',
+    paddingLeft: '120px',
+    paddingRight: '120px',
+    alignItems: 'center',
+    position: 'fixed',
+    zIndex: '1',
+    top: '0',
+}))
+
+const Logo = styledComponents.p`
+    font-weight: 600;
+    font-size: 38px;
+    line-height: 57px;
+
+    margin: 0;
+    color: #ffffff;
+`

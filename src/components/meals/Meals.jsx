@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import styled from "styled-components";
-import { getMeals} from "../../store/meals/mealsSlice";
-import MealItem from "./meal-item/MealItem";
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import styled from 'styled-components'
+import getMeals from '../../store/meals/meals.thunk'
+import MealItem from './meal-item/MealItem'
 // const DUMMY_MILS = [
 //   {
 //     id: "1",
@@ -32,33 +32,29 @@ import MealItem from "./meal-item/MealItem";
 // ];
 
 const Meals = () => {
-  const dispatch = useDispatch()
- const {meals = [],isLoading,error} = useSelector((state) => state.meals)
- console.log(error);
- 
+    const dispatch = useDispatch()
+    const { meals = [], isLoading, error } = useSelector((state) => state.meals)
 
-  useEffect(() => {
-    dispatch(getMeals())
+    useEffect(() => {
+        dispatch(getMeals())
+    }, [dispatch])
+    return (
+        <Card>
+            {isLoading && <p>loading......</p>}
+            {error && <p style={{ color: 'red' }}>{error}</p>}
+            {meals.map((meal) => {
+                return <MealItem meal={meal} key={meal.id} />
+            })}
+        </Card>
+    )
+}
 
-  },[dispatch])
-  return <>
-    <Card>
-      {isLoading && <p>loading......</p>}
-      {error && <p style={{color: "red"}}>{error}</p>}
-    {meals.map((meal) => {
-      return <MealItem meal={meal} key={meal.id}/>
-    })}
-    </Card>
-  </>;
-};
-
-export default Meals;
-
+export default Meals
 
 const Card = styled.div`
-  background: #FFFFFF;
-border-radius: 16px;
-width:75%;
-margin: 40px auto;
-padding:40px 40px 36px 40px;
+    background: #ffffff;
+    border-radius: 16px;
+    width: 75%;
+    margin: 40px auto;
+    padding: 40px 40px 36px 40px;
 `
